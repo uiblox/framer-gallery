@@ -1,6 +1,9 @@
+import { useFetch } from "../../hooks/useFetch";
 import { motion } from "motion/react";
 
 export const Gallery = () => {
+  const { data: images } = useFetch();
+
   return (
     <div className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 text-slate-200">
       <div className="max-w-7xl mx-auto">
@@ -46,6 +49,18 @@ export const Gallery = () => {
               Click on any imager to get addition details
             </motion.p>
           </motion.div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {images?.map((img) => {
+            return (
+              <img
+                key={img.id}
+                src={img.urls.regular}
+                alt={img.alt_description ?? "Gallery image"}
+                className="w-full h-64 object-cover rounded-lg"
+              />
+            );
+          })}
         </div>
       </div>
     </div>
