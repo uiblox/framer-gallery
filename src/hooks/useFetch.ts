@@ -12,7 +12,7 @@ export const useFetch = () => {
   const [data, setData] = useState<UnsplashImage[] | null>(null);
   const ImageAccessKey = import.meta.env.VITE_API_KEY;
 
-  const url = `https://api.unsplash.com/photos/?client_id=${ImageAccessKey}`;
+  const url = `https://api.unsplash.com/search/photos?query=nature&client_id=${ImageAccessKey}`;
 
   useEffect(() => {
     async function fetchImages() {
