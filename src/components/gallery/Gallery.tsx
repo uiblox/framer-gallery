@@ -55,7 +55,7 @@ export const Gallery = () => {
             return (
               <img
                 key={img.id}
-                src={img.urls.regular}
+                src={`${img.urls.regular}?auto=format&fit=crop&w=1200&q=90`}
                 alt={img.alt_description ?? "Gallery image"}
                 className="w-full h-64 object-cover rounded-lg"
               />
