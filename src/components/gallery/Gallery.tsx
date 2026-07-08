@@ -1,3 +1,4 @@
+import { delay } from "motion";
 import { useFetch } from "../../hooks/useFetch";
 import { motion } from "motion/react";
 
@@ -50,18 +51,43 @@ export const Gallery = () => {
             </motion.p>
           </motion.div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {images?.map((img) => {
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {
+              opacity: 0,
+            },
+            visible: {
+              opacity: 1,
+              transition: {
+                duration: 0.6,
+              },
+            },
+          }}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {images?.map((img, index) => {
             return (
-              <img
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{
+                  delay: index * 0.1,
+                }}
                 key={img.id}
-                src={`${img.urls.regular}?auto=format&fit=crop&w=1200&q=90`}
-                alt={img.alt_description ?? "Gallery image"}
-                className="w-full h-64 object-cover rounded-lg"
-              />
+              >
+                <img
+                  src={`${img.urls.regular}?auto=format&fit=crop&w=1200&q=90`}
+                  alt={img.alt_description ?? "Gallery image"}
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

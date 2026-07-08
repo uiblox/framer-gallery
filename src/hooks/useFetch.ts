@@ -18,6 +18,7 @@ export const useFetch = () => {
     async function fetchImages() {
       const response = await fetch(url);
       const imageJSON = (await response.json()) as UnsplashImage[];
+      console.log(imageJSON);
       setData(imageJSON);
     }
     fetchImages();
