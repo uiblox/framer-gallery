@@ -20,9 +20,18 @@ export const useFetch = () => {
 
   useEffect(() => {
     async function fetchImages() {
+      let isMounted = true;
+
       const response = await fetch(url);
       const imageJSON = (await response.json()) as UnsplashSearch;
-      setData(imageJSON);
+
+      if (isMounted) {
+        setData(imageJSON);
+      }
+
+      return () => {
+        isMounted = false;
+      };
     }
 
     fetchImages();
