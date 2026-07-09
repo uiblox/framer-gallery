@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-type UnsplashRecord = {
+export type UnsplashRecord = {
   id: string;
   urls: {
     regular: string;
+    full: string;
   };
   alt_description?: string | null;
 };
