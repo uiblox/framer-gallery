@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-type UnsplashImage = {
+type UnsplashRecord = {
   id: string;
   urls: {
     regular: string;
@@ -8,8 +8,12 @@ type UnsplashImage = {
   alt_description?: string | null;
 };
 
+type UnsplashSearch = {
+  results: UnsplashRecord[];
+};
+
 export const useFetch = () => {
-  const [data, setData] = useState<UnsplashImage[] | null>(null);
+  const [data, setData] = useState<UnsplashSearch | null>(null);
   const ImageAccessKey = import.meta.env.VITE_API_KEY;
 
   const url = `https://api.unsplash.com/search/photos?query=nature&client_id=${ImageAccessKey}`;
@@ -17,10 +21,10 @@ export const useFetch = () => {
   useEffect(() => {
     async function fetchImages() {
       const response = await fetch(url);
-      const imageJSON = (await response.json()) as UnsplashImage[];
-      console.log(imageJSON);
+      const imageJSON = (await response.json()) as UnsplashSearch;
       setData(imageJSON);
     }
+
     fetchImages();
   }, [url]);
 
