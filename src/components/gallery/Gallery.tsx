@@ -66,7 +66,7 @@ export const Gallery = () => {
           }}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {images?.results.map((img, index) => {
+          {images?.results?.map((img, index) => {
             return (
               <motion.div
                 variants={{
