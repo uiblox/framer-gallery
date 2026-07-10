@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { AnimatePresence, motion } from "motion/react";
 import { type UnsplashRecord } from "../../hooks/useFetch";
@@ -14,15 +14,23 @@ export const Gallery = () => {
     console.log(image);
     setSelectedImage(image);
     setIsLightboxOpen(true);
-    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
     setIsLightboxOpen(false);
-    document.body.style.overflow = "hidden";
   };
 
+  useEffect(() => {
+    if (isLightboxOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isLightboxOpen]);
   return (
     <div className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 text-slate-200">
       <div className="max-w-7xl mx-auto">
@@ -117,15 +125,15 @@ export const Gallery = () => {
                 >
                   x
                 </button>
-                <div className="flex flex-col md:flex-row">
+                <div className="flex flex-col md:flex-row md:justify-between">
                   <div>
                     <img
-                      className="w-full h-80 lg:h-160 object-cover rounded-lg"
+                      className="w-full h-80 lg:h-160 object-cover object-center rounded-lg grow"
                       src={selectedImage.urls.full}
                       alt={selectedImage.alt_description ?? "Gallery image"}
                     />
                   </div>
-                  <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col">
+                  <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col grow-0">
                     <h2 className="text-2xl font-bold mb-2">
                       {selectedImage.alt_description}
                     </h2>
