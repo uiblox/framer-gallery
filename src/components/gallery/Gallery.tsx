@@ -11,6 +11,7 @@ export const Gallery = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const openLightbox = (image: UnsplashRecord) => {
+    console.log(image);
     setSelectedImage(image);
     setIsLightboxOpen(true);
     document.body.style.overflow = "hidden";
@@ -116,12 +117,20 @@ export const Gallery = () => {
                 >
                   x
                 </button>
-                <div>
-                  <img
-                    className="w-full h-80 lg:h-160 object-cover rounded"
-                    src={selectedImage.urls.full}
-                    alt={selectedImage.alt_description ?? "Gallery image"}
-                  />
+                <div className="flex flex-col md:flex-row">
+                  <div>
+                    <img
+                      className="w-full h-80 lg:h-160 object-cover rounded-lg"
+                      src={selectedImage.urls.full}
+                      alt={selectedImage.alt_description ?? "Gallery image"}
+                    />
+                  </div>
+                  <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col">
+                    <h2 className="text-2xl font-bold mb-2">
+                      {selectedImage.alt_description}
+                    </h2>
+                    <p className="text-slate-300">{`Photographer: ${selectedImage.user.first_name}`}</p>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
