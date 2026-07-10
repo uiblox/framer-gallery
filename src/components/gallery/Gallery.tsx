@@ -11,13 +11,15 @@ export const Gallery = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const openLightbox = (image: UnsplashRecord) => {
-    console.log(image);
     setSelectedImage(image);
     setIsLightboxOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
+    setSelectedImage(null);
     setIsLightboxOpen(false);
+    document.body.style.overflow = "hidden";
   };
 
   return (
@@ -60,7 +62,7 @@ export const Gallery = () => {
                 delay: 0.2,
                 duration: 0.6,
               }}
-              className="text-lg text-slate-300"
+              className="text-lg text-slate-300 mx-auto"
             >
               Click on any imager to get addition details
             </motion.p>
@@ -80,7 +82,7 @@ export const Gallery = () => {
               },
             },
           }}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols3 gap-6"
         >
           {images?.results?.map((img, index) => {
             return (
@@ -107,7 +109,13 @@ export const Gallery = () => {
         <AnimatePresence>
           {isLightboxOpen && selectedImage && (
             <motion.div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4">
-              <motion.div className="bg-slate-900 rounded-xl overflow-hidden max-w-6xl w-full">
+              <motion.div className="bg-slate-900 rounded-xl overflow-hidden max-w-6xl w-full relative">
+                <button
+                  className="absolute top-4 right-4 z-10 bg-slate-800 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+                  onClick={closeLightbox}
+                >
+                  x
+                </button>
                 <div>
                   <img
                     className="w-full h-80 lg:h-160 object-cover rounded"
