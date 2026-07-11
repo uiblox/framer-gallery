@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { AnimatePresence, motion } from "motion/react";
 import { type UnsplashRecord } from "../../hooks/useFetch";
+import { image } from "motion/react-client";
 
 export const Gallery = () => {
   const { data: images } = useFetch();
@@ -11,7 +12,6 @@ export const Gallery = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const openLightbox = (image: UnsplashRecord) => {
-    console.log(image);
     setSelectedImage(image);
     setIsLightboxOpen(true);
   };
@@ -31,6 +31,10 @@ export const Gallery = () => {
       document.body.style.overflow = "auto";
     };
   }, [isLightboxOpen]);
+
+  const currentImageIndex =
+    images?.results?.findIndex((img) => img.id === selectedImage?.id) ?? -1;
+
   return (
     <div className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 text-slate-200">
       <div className="max-w-7xl mx-auto">
@@ -139,6 +143,9 @@ export const Gallery = () => {
                     </h2>
                     <p className="text-slate-300">{`Photographer: ${selectedImage.user.first_name}`}</p>
                     <div className="flex space-x-4 mt-auto">
+                      <div className="text-sm text-slate-400 self-center">
+                        {currentImageIndex + 1} / {images?.results?.length}
+                      </div>
                       <button className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg">
                         Previous
                       </button>
