@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 
 export type UnsplashRecord = {
   id: string;
+  description: string;
   user: {
     first_name: string;
+    location: string;
   };
   urls: {
     regular: string;

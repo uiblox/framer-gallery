@@ -116,8 +116,10 @@ export const Gallery = () => {
           className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols3 gap-6"
         >
           {images?.results?.map((img, index) => {
+            console.log(img);
             return (
               <motion.div
+                className="relative group"
                 onClick={() => openLightbox(img)}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
@@ -133,6 +135,14 @@ export const Gallery = () => {
                   alt={img.alt_description ?? "Gallery image"}
                   className="w-full h-64 object-cover rounded-lg"
                 />
+                <div className="absolute inset-0 group-hover:bg-black/60 duration-200 flex items-end">
+                  <div className="p-4 text-white translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-200">
+                    <h3 className="text-lg font-semibold">
+                      {img.user.location ? `${img.user.location}` : ""}
+                    </h3>
+                    <p className="text-sm">{img.alt_description}</p>
+                  </div>
+                </div>
               </motion.div>
             );
           })}
