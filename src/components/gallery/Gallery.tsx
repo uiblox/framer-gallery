@@ -35,6 +35,31 @@ export const Gallery = () => {
   const currentImageIndex =
     images?.results?.findIndex((img) => img.id === selectedImage?.id) ?? -1;
 
+  const nextImage = (current: number) => {
+    const nextCount = current + 1;
+    const totalCount = images?.results.length;
+    const newImage = images?.results?.[nextCount] as UnsplashRecord | undefined;
+    console.log(nextCount);
+    console.log(totalCount && totalCount);
+    if (newImage && images?.results) {
+      if (nextCount === totalCount) {
+        console.log(images?.results?.[0]);
+        setSelectedImage(images?.results?.[0]);
+        return;
+      }
+      setSelectedImage(newImage);
+    }
+  };
+
+  const prevImage = (current: number) => {
+    const prevCount = current - 1;
+    const newImage = images?.results?.[prevCount] as UnsplashRecord | undefined;
+
+    if (newImage) {
+      setSelectedImage(newImage);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 text-slate-200">
       <div className="max-w-7xl mx-auto">
@@ -142,14 +167,20 @@ export const Gallery = () => {
                       {selectedImage.alt_description}
                     </h2>
                     <p className="text-slate-300">{`Photographer: ${selectedImage.user.first_name}`}</p>
+                    <div className="text-slate-400 my-4 text-sm">
+                      {currentImageIndex + 1} / {images?.results?.length}
+                    </div>
                     <div className="flex space-x-4 mt-auto">
-                      <div className="text-sm text-slate-400 self-center">
-                        {currentImageIndex + 1} / {images?.results?.length}
-                      </div>
-                      <button className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg">
+                      <button
+                        className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg"
+                        onClick={() => prevImage(currentImageIndex)}
+                      >
                         Previous
                       </button>
-                      <button className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg">
+                      <button
+                        className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg"
+                        onClick={() => nextImage(currentImageIndex)}
+                      >
                         Next
                       </button>
                     </div>
