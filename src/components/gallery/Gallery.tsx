@@ -47,7 +47,7 @@ export const Gallery = () => {
   const prevImage = (current: number) => {
     if (images?.results) {
       const prevIndex =
-        (current - images?.results.length) % images.results.length;
+        (current - 1 + images?.results.length) % images.results.length;
       const newImage = images?.results?.[prevIndex] as UnsplashRecord;
       setSelectedImage(newImage);
     }
@@ -147,8 +147,8 @@ export const Gallery = () => {
                 >
                   x
                 </button>
-                <div className="flex flex-col md:flex-row md:justify-between">
-                  <div>
+                <div className="flex flex-col md:flex-row">
+                  <div className="flex-1 p-6 flex item-center">
                     <img
                       className="w-full h-80 lg:h-160 object-cover object-center rounded-lg grow"
                       src={selectedImage.urls.full}
