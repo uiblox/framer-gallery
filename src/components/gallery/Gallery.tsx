@@ -36,26 +36,19 @@ export const Gallery = () => {
     images?.results?.findIndex((img) => img.id === selectedImage?.id) ?? -1;
 
   const nextImage = (current: number) => {
-    const nextCount = current + 1;
-    const totalCount = images?.results.length;
-    const newImage = images?.results?.[nextCount] as UnsplashRecord | undefined;
-    console.log(nextCount);
-    console.log(totalCount && totalCount);
-    if (newImage && images?.results) {
-      if (nextCount === totalCount) {
-        console.log(images?.results?.[0]);
-        setSelectedImage(images?.results?.[0]);
-        return;
-      }
+    if (images?.results) {
+      const nextIndex =
+        (current + 1 + images?.results.length) % images.results.length;
+      const newImage = images?.results?.[nextIndex] as UnsplashRecord;
       setSelectedImage(newImage);
     }
   };
 
   const prevImage = (current: number) => {
-    const prevCount = current - 1;
-    const newImage = images?.results?.[prevCount] as UnsplashRecord | undefined;
-
-    if (newImage) {
+    if (images?.results) {
+      const prevIndex =
+        (current - images?.results.length) % images.results.length;
+      const newImage = images?.results?.[prevIndex] as UnsplashRecord;
       setSelectedImage(newImage);
     }
   };
