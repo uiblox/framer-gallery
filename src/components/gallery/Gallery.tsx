@@ -179,6 +179,18 @@ export const Gallery = () => {
                     </div>
                   </div>
                 </div>
+                <button
+                  onClick={() => prevImage(currentImageIndex)}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-slate-800 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+                >
+                  &#10094;
+                </button>
+                <button
+                  onClick={() => nextImage(currentImageIndex)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-slate-800 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+                >
+                  &#10095;
+                </button>
               </motion.div>
             </motion.div>
           )}
