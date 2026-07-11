@@ -133,11 +133,19 @@ export const Gallery = () => {
                       alt={selectedImage.alt_description ?? "Gallery image"}
                     />
                   </div>
-                  <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col grow-0">
+                  <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col">
                     <h2 className="text-2xl font-bold mb-2">
                       {selectedImage.alt_description}
                     </h2>
                     <p className="text-slate-300">{`Photographer: ${selectedImage.user.first_name}`}</p>
+                    <div className="flex space-x-4 mt-auto">
+                      <button className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg">
+                        Previous
+                      </button>
+                      <button className="flex-1 bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg">
+                        Next
+                      </button>
+                    </div>
                   </div>
                 </div>
               </motion.div>
