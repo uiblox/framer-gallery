@@ -155,7 +155,13 @@ export const Gallery = () => {
         </motion.div>
         <AnimatePresence>
           {isLightboxOpen && selectedImage && (
-            <motion.div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4"
+            >
               <motion.div className="bg-slate-900 rounded-xl overflow-hidden max-w-6xl w-full relative">
                 <button
                   className="absolute top-4 right-4 z-10 bg-slate-800 hover:bg-slate-700 text-white w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
@@ -164,13 +170,13 @@ export const Gallery = () => {
                   x
                 </button>
                 <div className="flex flex-col md:flex-row">
-                  <div className="flex-1 p-6 flex item-center">
+                  <motion.div className="flex-1 p-6 flex item-center">
                     <img
                       className="w-full h-80 lg:h-160 object-cover object-center rounded-lg grow"
                       src={selectedImage.urls.full}
                       alt={selectedImage.alt_description ?? "Gallery image"}
                     />
-                  </div>
+                  </motion.div>
                   <div className="md:w-96 bg-slate-800 p-6 text-white flex flex-col">
                     <h2 className="text-2xl font-bold mb-2">
                       {selectedImage.alt_description}
