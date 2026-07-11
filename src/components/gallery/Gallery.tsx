@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
 import { AnimatePresence, motion } from "motion/react";
 import { type UnsplashRecord } from "../../hooks/useFetch";
-import { image } from "motion/react-client";
 
 export const Gallery = () => {
   const { data: images } = useFetch();
@@ -126,7 +125,7 @@ export const Gallery = () => {
             }
             return (
               <motion.div
-                className={`relative group ${spanClass}`}
+                className={`relative cursor-pointer group ${spanClass}`}
                 onClick={() => openLightbox(img)}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
