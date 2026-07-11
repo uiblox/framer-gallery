@@ -113,13 +113,20 @@ export const Gallery = () => {
               },
             },
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {images?.results?.map((img, index) => {
-            console.log(img);
+            const row = Math.floor(index / 2);
+            const posInRow = index % 2;
+            let spanClass = "";
+            if (row % 2 === 0) {
+              spanClass = posInRow === 0 ? "lg:col-span-2" : "lg:col-span-1";
+            } else {
+              spanClass = posInRow === 0 ? "lg:col-span-1" : "lg:col-span-2";
+            }
             return (
               <motion.div
-                className="relative group"
+                className={`relative group ${spanClass}`}
                 onClick={() => openLightbox(img)}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
